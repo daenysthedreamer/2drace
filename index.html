@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,19 +8,29 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
-
+        <h1 class="text-center my-4">2D RACE</h1>
     </header>
     <main>
+        <section class="gameArea">
+            <p class="text-end pt-4 pe-4 m-0">SCORE: <span class="score">0</span></p>
+            <p class="text-end pe-4">LAPS: <span class="laps">0</span>/<span class="max-laps">3</span></p>
+        </section>
         <section>
-            <div class="container">
-                
+            <div class="container d-flex">
+                <button class="btn btn-warning me-auto fs-3">Beállítások</button>
+                <button class="btn btn-success play fs-3">PLAY</button>
             </div>
         </section>
     </main>
     <footer>
+        <p class="text-center">Minden jog fenntartva!</p>
     </footer>
+    <script src="js/Entitasok.js"></script>
+    <script src="js/Auto.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

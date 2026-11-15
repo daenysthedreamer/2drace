@@ -7,3 +7,22 @@ body{
     font-style: normal;
     font-weight: 400;
 }
+
+.gameArea{
+    background-image: url(../img/Midnight\ Motorist\ Map.png);
+    height:800px;
+    width: 100%;
+    background-repeat:repeat-x;
+    color:#fff;
+    position: relative;
+}
+
+.btn.btn-warning {
+    background-color: #00ffff;
+    border-color: #00ffff;
+}
+
+.btn.btn-warning:active {
+    background-color: #00a6a6;
+    border-color: #00a6a6;
+}
