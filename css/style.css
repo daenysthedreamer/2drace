@@ -15,6 +15,7 @@ body{
     background-repeat:repeat-x;
     color:#fff;
     position: relative;
+    overflow: hidden;
 }
 
 .btn.btn-warning {
@@ -25,4 +26,14 @@ body{
 .btn.btn-warning:active {
     background-color: #00a6a6;
     border-color: #00a6a6;
+}
+
+.entitas{
+    position: absolute;
+    width: 120px;
+    height: 100%;
+    background-image: url(../img/auto.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    
 }
