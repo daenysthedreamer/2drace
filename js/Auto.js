@@ -9,7 +9,9 @@ class Auto{
         this.setX(x);
         this.setY(y);
         this.setSpeed(speed);
-        this.setContainer(container)
+        this.setContainer(container);
+
+        this.createElement();
     }
 
     setX(x){
@@ -30,6 +32,22 @@ class Auto{
 
     createElement() {
         this.#element = document.createElement('div');
-        
+        this.#element.classList.add('player');
+        this.#element.style.left = this.#x + "px";
+        this.#element.style.top = this.#y + "px";
+        this.#container.appendChild(this.#element);
+    }
+
+    move(dx, dy) {
+        this.#x += dx * this.#speed;
+        this.#y += dy * this.#speed;
+
+        if (this.#x < 0) this.#x = 0;
+        if (this.#y < 0) this.#y = 0;
+        if (this.#x > this.#container.clientWidth - 120) this.#x = this.#container.clientWidth - 120;
+        if (this.#y > this.#container.clientHeight - 150) this.#y = this.#container.clientHeight - 150;
+
+        this.#element.style.left = this.#x + "px";
+        this.#element.style.top = this.#y + "px";
     }
 }

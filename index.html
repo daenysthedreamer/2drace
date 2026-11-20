@@ -16,21 +16,58 @@
     <main>
         <section class="gameArea">
             <p class="text-end pt-4 pe-4 m-0">SCORE: <span class="score">0</span></p>
-            <p class="text-end pe-4">LAPS: <span class="laps">0</span>/<span class="max-laps">3</span></p>
+            <p class="text-end pe-4">LAPS: <span class="currentLaps">0</span>/<span class="max-laps">3</span></p>
         </section>
         <section>
-            <div class="container d-flex">
-                <button class="btn btn-warning me-auto fs-3">Beállítások</button>
-                <button class="btn btn-success play fs-3">PLAY</button>
+            <div class="container d-flex my-5">
+                <button class="btn btn-warning mx-auto settings fs-3">Beállítások</button>
+                <button class="btn btn-success mx-auto play fs-3">PLAY</button>
             </div>
         </section>
     </main>
     <footer>
         <p class="text-center">Minden jog fenntartva!</p>
     </footer>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Beállítások</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Laps:</label>
+                            <input type="number" class="form-control laps">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Max speed:</label>
+                            <input type="number" class="form-control maxSpeed">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Enemy count:</label>
+                            <input type="number" class="form-control enemyCount">
+                        </div>
+                        
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                    <button type="button" class="btn btn-primary">Mentés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/Entitasok.js"></script>
     <script src="js/Auto.js"></script>
     <script src="js/script.js"></script>
+
+
 </body>
 
 </html>
