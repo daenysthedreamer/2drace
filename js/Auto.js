@@ -1,11 +1,11 @@
-class Auto{
+class Auto {
     #x;
     #y;
     #speed;
     #container;
     #element;
 
-    constructor(x, y, speed, container){
+    constructor(x, y, speed, container) {
         this.setX(x);
         this.setY(y);
         this.setSpeed(speed);
@@ -14,19 +14,19 @@ class Auto{
         this.createElement();
     }
 
-    setX(x){
+    setX(x) {
         this.#x = x;
     }
 
-    setY(y){
+    setY(y) {
         this.#y = y;
     }
 
-    setSpeed(speed){
+    setSpeed(speed) {
         this.#speed = speed;
     }
 
-    setContainer(container){
+    setContainer(container) {
         this.#container = document.querySelector(container);
     }
 
@@ -50,4 +50,9 @@ class Auto{
         this.#element.style.left = this.#x + "px";
         this.#element.style.top = this.#y + "px";
     }
+//ai
+    getRect() {
+        return this.#element.getBoundingClientRect();
+    }
+    //
 }
