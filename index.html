@@ -38,25 +38,24 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label class="form-label">Laps:</label>
-                            <input type="number" class="form-control laps">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Max speed:</label>
-                            <input type="number" class="form-control maxSpeed">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Lap length:</label>
-                            <input type="number" class="form-control lapLength">
-                        </div>
-                        
-                    </form>
+         <form>
+    <div class="mb-3">
+        <label class="form-label">Laps (1-10):</label>
+        <input type="number" class="form-control laps" min="1" max="10">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Max speed (8-20):</label>
+        <input type="number" class="form-control maxSpeed" min="8" max="20">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Lap length (2000-10000):</label>
+        <input type="number" class="form-control lapLength" min="2000" max="10000">
+    </div>
+</form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
-                    <button type="button" class="btn btn-primary">Mentés</button>
+                    <button type="button" class="btn btn-primary save">Mentés</button>
                 </div>
             </div>
         </div>

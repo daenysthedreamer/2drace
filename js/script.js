@@ -1,14 +1,11 @@
 var gameArea = document.querySelector(".gameArea");
 var finishLine = document.querySelector(".finishLine");
 var driveInterval = null;
-const playbtn = document.querySelector(".play")
-const beallitasbtn = document.querySelector(".settings")
+const playbtn = document.querySelector(".play");
+const beallitasbtn = document.querySelector(".settings");
 var gameInterval = null;
 var player = null;
 const keys = new Set();
-
-
-
 
 var maxLaps = 3;
 var minSpeed = 6;
@@ -24,27 +21,22 @@ function movePlayer() {
         let dx = (keys.has("d") ? 1 : 0) - (keys.has("a") ? 1 : 0);
         let dy = (keys.has("s") ? 1 : 0) - (keys.has("w") ? 1 : 0);
 
-
         if (dx !== 0 || dy !== 0) player.move(dx, dy);
     }
-    //ai
     requestAnimationFrame(movePlayer);
-    //
 }
-//ai
 
 function collide(a, b) {
     const pad = 40;
     if ((a.right - pad - 20 < b.left + pad) || (a.left + pad + 20 > b.right - pad) || (a.bottom - pad - 20 < b.top + pad) || (a.top + pad + 20 > b.bottom - pad)) return false;
     return true;
 }
-//
 
 var currentLaps = 0;
 var lapLength = 8000;
 var distance = 0;
 var currentLeft = 0;
-var lapsMezo = document.querySelector(".currentLaps")
+var lapsMezo = document.querySelector(".currentLaps");
 var enemies = [];
 var score = 0;
 var scoreSpeed = 12;
@@ -54,7 +46,7 @@ playbtn.addEventListener('click', () => {
     if (driveInterval == null) {
         driveInterval = setInterval(() => {
             if (speed < maxSpeed) {
-                speed += acceleration
+                speed += acceleration;
             }
             currentLeft = parseFloat(gameArea.style.backgroundPositionX) || 0;
             gameArea.style.backgroundPositionX = (currentLeft - speed) + 'px';
@@ -65,7 +57,7 @@ playbtn.addEventListener('click', () => {
                 currentLaps++;
                 lapsMezo.innerHTML = currentLaps;
             }
-            
+
             for (let i = enemies.length - 1; i >= 0; i--) {
                 if (enemies[i].isRemoved()) {
                     enemies.splice(i, 1);
@@ -77,17 +69,16 @@ playbtn.addEventListener('click', () => {
                     var x = 0;
                     var anim = setInterval(() => {
                         document.querySelector(".player").classList.toggle('d-none', x % 2 == 0);
-                        x++
+                        x++;
                         if (x == 10) clearInterval(anim);
                     }, 50);
                 }
             }
 
             if (speed >= maxSpeed * 0.3 + (maxSpeed - speed)) {
-                score += 0.25
+                score += 0.25;
                 scoreMezo.innerHTML = Math.floor(score);
             }
-
 
             if (currentLaps >= maxLaps) {
                 clearInterval(driveInterval);
@@ -111,17 +102,39 @@ playbtn.addEventListener('click', () => {
         player = new Auto(20, gameArea.offsetHeight / 2.5, 6, ".gameArea");
         movePlayer();
     }
-})
+});
 
 
-const beallitasModal = new bootstrap.Modal('#exampleModal')
-var lapsInput = document.querySelector(".laps");
-var speedInput = document.querySelector(".maxSpeed");
-var lapLengthInput = document.querySelector(".lapLength");
+const beallitasModal = new bootstrap.Modal('#exampleModal');
+const mentesbtn = document.querySelector("#exampleModal .btn-primary");
+const lapsInput = document.querySelector(".laps");
+const speedInput = document.querySelector(".maxSpeed");
+const lapLengthInput = document.querySelector(".lapLength");
+const inputs = [lapsInput, speedInput, lapLengthInput];
 
 beallitasbtn.addEventListener('click', () => {
     lapsInput.value = maxLaps;
     speedInput.value = maxSpeed;
     lapLengthInput.value = lapLength;
+    inputs.forEach(input => input.classList.remove("is-invalid"));
     beallitasModal.show();
-})
+});
+
+mentesbtn.addEventListener('click', () => {
+    let ok = true;
+
+    for (const input of inputs) {
+        const value = Number(input.value);
+        const valid = input.value !== "" && Number.isInteger(value) && value >= input.min && value <= input.max;
+        input.classList.toggle("is-invalid", !valid);
+        if (!valid) ok = false;
+    }
+    if (!ok) return;
+
+    maxLaps = Number(lapsInput.value);
+    maxSpeed = Number(speedInput.value);
+    lapLength = Number(lapLengthInput.value);
+    document.querySelector(".max-laps").textContent = maxLaps;
+
+    beallitasModal.hide();
+});
