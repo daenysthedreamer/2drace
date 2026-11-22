@@ -7,6 +7,7 @@ class Entitasok{
     #type
     #moveInterval
     static #pont;
+    static #roadSpeed = 0;
 
     constructor(x, y, speed, container){
         this.setX(x);
@@ -33,6 +34,10 @@ class Entitasok{
     }
 
 
+    static setRoadSpeed(value) {
+    Entitasok.#roadSpeed = value;
+    }
+
     createElement() {
         this.#element = document.createElement("div");
         this.#element.style.left = this.#x + "px";
@@ -52,7 +57,7 @@ class Entitasok{
                 return;
             }
 
-            this.#x -= this.#speed;
+            this.#x -= this.#speed + Entitasok.#roadSpeed;
             this.#element.style.left = this.#x + "px";
             if (this.#x < -50) {
                 this.remove();

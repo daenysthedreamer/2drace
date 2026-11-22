@@ -38,20 +38,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-         <form>
-    <div class="mb-3">
-        <label class="form-label">Laps (1-10):</label>
-        <input type="number" class="form-control laps" min="1" max="10">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Max speed (8-20):</label>
-        <input type="number" class="form-control maxSpeed" min="8" max="20">
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Lap length (2000-10000):</label>
-        <input type="number" class="form-control lapLength" min="2000" max="10000">
-    </div>
-</form>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Laps (1-10):</label>
+                            <input type="number" class="form-control laps" min="1" max="10">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Max speed (8-20):</label>
+                            <input type="number" class="form-control maxSpeed" min="8" max="20">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Lap length (2000-10000):</label>
+                            <input type="number" class="form-control lapLength" min="2000" max="10000">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
@@ -61,12 +61,21 @@
         </div>
     </div>
 
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <p class="fs-5 mb-3">Sikeres beállítás!</p>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/Entitasok.js"></script>
     <script src="js/Auto.js"></script>
     <script src="js/script.js"></script>
-
 
 </body>
 

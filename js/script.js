@@ -52,6 +52,7 @@ playbtn.addEventListener('click', () => {
             gameArea.style.backgroundPositionX = (currentLeft - speed) + 'px';
 
             distance += speed;
+            Entitasok.setRoadSpeed(speed);
             finishLine.style.left = ((currentLaps + 1) * lapLength - distance) + 'px';
             if (finishLine.getBoundingClientRect().left <= player.getRect().right) {
                 currentLaps++;
@@ -92,7 +93,8 @@ playbtn.addEventListener('click', () => {
         gameInterval = setInterval(() => {
             var y = Math.random() * (gameArea.offsetHeight - 150);
             var speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
-            var obj = new Entitasok(gameArea.offsetWidth, y, speed, ".gameArea");
+            var enemySpeed = Math.random() * 4;
+            var obj = new Entitasok(gameArea.offsetWidth, y, enemySpeed, ".gameArea");
             obj.move();
             enemies.push(obj);
         }, 290);
@@ -106,11 +108,13 @@ playbtn.addEventListener('click', () => {
 
 
 const beallitasModal = new bootstrap.Modal('#exampleModal');
+const sikerModal = new bootstrap.Modal('#successModal');
 const mentesbtn = document.querySelector("#exampleModal .btn-primary");
 const lapsInput = document.querySelector(".laps");
 const speedInput = document.querySelector(".maxSpeed");
 const lapLengthInput = document.querySelector(".lapLength");
 const inputs = [lapsInput, speedInput, lapLengthInput];
+let mentve = false;
 
 beallitasbtn.addEventListener('click', () => {
     lapsInput.value = maxLaps;
@@ -125,7 +129,7 @@ mentesbtn.addEventListener('click', () => {
 
     for (const input of inputs) {
         const value = Number(input.value);
-        const valid = input.value !== "" && Number.isInteger(value) && value >= input.min && value <= input.max;
+        const valid = input.value === String(value) && Number.isInteger(value) && value >= input.min && value <= input.max;
         input.classList.toggle("is-invalid", !valid);
         if (!valid) ok = false;
     }
@@ -134,7 +138,17 @@ mentesbtn.addEventListener('click', () => {
     maxLaps = Number(lapsInput.value);
     maxSpeed = Number(speedInput.value);
     lapLength = Number(lapLengthInput.value);
+    speed = Math.min(speed, maxSpeed);
     document.querySelector(".max-laps").textContent = maxLaps;
 
+    mentve = true;
     beallitasModal.hide();
+});
+
+
+document.querySelector("#exampleModal").addEventListener('hidden.bs.modal', () => {
+    if (mentve) {
+        mentve = false;
+        sikerModal.show();
+    }
 });
