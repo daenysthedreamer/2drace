@@ -28,7 +28,7 @@ function movePlayer() {
 
 function collide(a, b) {
     const pad = 40;
-    if ((a.right - pad - 20 < b.left + pad) || (a.left + pad + 20 > b.right - pad) || (a.bottom - pad - 20 < b.top + pad) || (a.top + pad + 20 > b.bottom - pad)) return false;
+    if ((a.right - pad < b.left + pad) || (a.left + pad > b.right - pad) || (a.bottom - pad < b.top + pad) || (a.top + pad > b.bottom - pad)) return false;
     return true;
 }
 
@@ -92,7 +92,6 @@ playbtn.addEventListener('click', () => {
     if (gameInterval == null) {
         gameInterval = setInterval(() => {
             var y = Math.random() * (gameArea.offsetHeight - 150);
-            var speed = minSpeed + Math.random() * (maxSpeed - minSpeed);
             var enemySpeed = Math.random() * 4;
             var obj = new Entitasok(gameArea.offsetWidth, y, enemySpeed, ".gameArea");
             obj.move();

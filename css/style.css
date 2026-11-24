@@ -39,8 +39,8 @@ body{
 
 .player {
     background-image: url(../img/player.png);
-    width: 170px;
-    height: 170px;
+    width: 120px;
+    height: 120px;
 }
 
 .finishLine {
