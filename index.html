@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="hu" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -11,44 +11,40 @@
 
 <body>
     <header>
-        <h1 class="text-center my-4">2D RACE</h1>
+        <h1 class="text-center py-3 mb-1">2D RACE</h1>
+        <button class="btn btn-warning mx-auto settings fs-3">Beállítások</button>
     </header>
     <main>
         <section class="gameArea">
             <p class="text-end pt-4 pe-4 m-0">SCORE: <span class="score">0</span></p>
             <p class="text-end pe-4">LAPS: <span class="currentLaps">0</span>/<span class="max-laps">3</span></p>
+            <button class="btn btn-success mx-auto play fs-3">PLAY</button>
             <div class="finishLine"></div>
-        </section>
-        <section>
-            <div class="container d-flex my-5">
-                <button class="btn btn-warning mx-auto settings fs-3">Beállítások</button>
-                <button class="btn btn-success mx-auto play fs-3">PLAY</button>
-            </div>
         </section>
     </main>
     <footer>
-        <p class="text-center">Minden jog fenntartva!</p>
+        <p class="text-center pt-5">Minden jog fenntartva!</p>
     </footer>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-success">
-                    <h1 class="modal-title text-white fs-5" id="exampleModalLabel">Beállítások</h1>
+                    <h1 class="modal-title text-white fs-5 fw-bold" id="exampleModalLabel">Beállítások</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="mb-3">
-                            <label class="form-label">Laps (1-10):</label>
+                            <label class="form-label fs-6">Laps (1-10):</label>
                             <input type="number" class="form-control laps" min="1" max="10">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Max speed (8-20):</label>
+                            <label class="form-label fs-6">Max speed (8-20):</label>
                             <input type="number" class="form-control maxSpeed" min="8" max="20">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Lap length (2000-10000):</label>
+                            <label class="form-label fs-6">Lap length (2000-10000):</label>
                             <input type="number" class="form-control lapLength" min="2000" max="10000">
                         </div>
                     </form>

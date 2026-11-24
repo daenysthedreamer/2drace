@@ -45,9 +45,12 @@ var enemies = [];
 var score = 0;
 var scoreSpeed = 12;
 var scoreMezo = document.querySelector(".score");
+var playing = false;
 
 playbtn.addEventListener('click', () => {
-    if (driveInterval == null) {
+    if (driveInterval == null && player == null && gameInterval == null) {
+        playing = true;
+        playbtn.classList.toggle('d-none', playing)
         driveInterval = setInterval(() => {
             if (speed < maxSpeed) {
                 speed += acceleration;
@@ -91,9 +94,7 @@ playbtn.addEventListener('click', () => {
                 alert("Nyertél!");
             }
         }, 16);
-    }
 
-    if (gameInterval == null) {
         gameInterval = setInterval(() => {
             var y = Math.random() * (gameArea.offsetHeight - 150);
             var enemySpeed = Math.random() * 4;
@@ -101,9 +102,7 @@ playbtn.addEventListener('click', () => {
             obj.move();
             enemies.push(obj);
         }, 290);
-    }
 
-    if (player == null) {
         player = new Auto(20, gameArea.offsetHeight / 2.5, 6, ".gameArea");
         movePlayer();
     }
