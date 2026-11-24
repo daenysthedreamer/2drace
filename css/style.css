@@ -142,7 +142,12 @@ header h1{
 .btn.btn-secondary:active{
     background-color: #202d4f !important;
     box-shadow: 0 2px 0 #0a0e1c !important;
-}    border: 4px solid #2a3a63;
+}
+
+.modal-content{
+    background-color: #111830;
+    color: #c9cbd6;
+    border: 4px solid #2a3a63;
     border-radius: 0;
 }
 
