@@ -3,9 +3,13 @@ var finishLine = document.querySelector(".finishLine");
 var driveInterval = null;
 const playbtn = document.querySelector(".play");
 const beallitasbtn = document.querySelector(".settings");
+const mentesbtn = document.querySelector(".save");
 var gameInterval = null;
 var player = null;
 const keys = new Set();
+
+var beallitasModal = new bootstrap.Modal('#exampleModal');
+var sikerModal = new bootstrap.Modal('#successModal');
 
 var maxLaps = 3;
 var minSpeed = 6;
@@ -106,33 +110,37 @@ playbtn.addEventListener('click', () => {
 });
 
 
-const beallitasModal = new bootstrap.Modal('#exampleModal');
-const sikerModal = new bootstrap.Modal('#successModal');
-const mentesbtn = document.querySelector("#exampleModal .btn-primary");
-const lapsInput = document.querySelector(".laps");
-const speedInput = document.querySelector(".maxSpeed");
-const lapLengthInput = document.querySelector(".lapLength");
-const inputs = [lapsInput, speedInput, lapLengthInput];
-let mentve = false;
+var lapsInput = document.querySelector(".laps");
+var speedInput = document.querySelector(".maxSpeed");
+var lapLengthInput = document.querySelector(".lapLength");
+var mentve = false;
 
 beallitasbtn.addEventListener('click', () => {
     lapsInput.value = maxLaps;
     speedInput.value = maxSpeed;
     lapLengthInput.value = lapLength;
-    inputs.forEach(input => input.classList.remove("is-invalid"));
+    document.querySelectorAll("input").forEach(input => input.classList.remove('is-invalid'))
     beallitasModal.show();
 });
 
 mentesbtn.addEventListener('click', () => {
-    let ok = true;
-
-    for (const input of inputs) {
-        const value = Number(input.value);
-        const valid = input.value === String(value) && Number.isInteger(value) && value >= input.min && value <= input.max;
-        input.classList.toggle("is-invalid", !valid);
-        if (!valid) ok = false;
+    var valid = true;
+    document.querySelectorAll("input").forEach(input => input.classList.remove('is-invalid'))
+    
+    if (inputEllenorzes(lapsInput.value, 1, 10) == false) {
+        lapsInput.classList.add("is-invalid");
+        valid = false;
     }
-    if (!ok) return;
+    else if (inputEllenorzes(speedInput.value, 8, 20) == false) {
+        speedInput.classList.add("is-invalid");
+        valid = false;
+    }
+    else if (inputEllenorzes(lapLengthInput.value, 2000, 10000) == false) {
+        lapLengthInput.classList.add("is-invalid")
+        valid = false;
+    }
+
+    if (!valid) return;
 
     maxLaps = Number(lapsInput.value);
     maxSpeed = Number(speedInput.value);
@@ -140,14 +148,17 @@ mentesbtn.addEventListener('click', () => {
     speed = Math.min(speed, maxSpeed);
     document.querySelector(".max-laps").textContent = maxLaps;
 
-    mentve = true;
     beallitasModal.hide();
+
+    sikerModal.show();
 });
 
 
-document.querySelector("#exampleModal").addEventListener('hidden.bs.modal', () => {
-    if (mentve) {
-        mentve = false;
-        sikerModal.show();
+function inputEllenorzes(value, min, max) {
+    var szam = Number(value);
+
+    if (Number.isInteger(szam) && szam >= min && szam <= max) {
+        return true;
     }
-});
+    return false;
+}
