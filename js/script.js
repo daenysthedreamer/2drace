@@ -120,6 +120,7 @@ playbtn.addEventListener('click', () => {
 
         player = new Auto(20, gameArea.offsetHeight / 2.5, 6, ".gameArea");
         movePlayer();
+        document.querySelector(".player").classList.add((equipped!=null) ? `skin${parseInt(equipped)+1}` : "")
     }
 });
 
@@ -230,10 +231,11 @@ document.querySelector(".modes .hard").addEventListener("click", () => {
     document.querySelector(".lapLength").value = "12000";
 })
 
-var skinPrices = [200, 300, 400, 500, 600, 800, 1000, 1200, 1500, 2000, 2500, 3000];
+var skinArak = [200, 300, 400, 500, 600, 800, 1000, 1200, 1500, 2000, 2500, 3000];
 var skinList = document.querySelector(".skins");
 var balance = Number(localStorage.getItem("balance")) || 0;
 var balanceMezo = document.querySelector(".balance");
+var equipped = localStorage.getItem("equipped");
 
 buybtn.addEventListener('click', () => {
     balanceMezo.innerHTML = balance;
@@ -243,11 +245,36 @@ buybtn.addEventListener('click', () => {
 
 function kiir() {
     skinList.innerHTML = "";
-    for (let i = 0; i < skinPrices.length; i++) {
+    for (let i = 0; i < skinArak.length; i++) {
         skinList.innerHTML += `
         <div class="col-3 text-center">
-            <img src="img/skin${i + 1}.png" class="img-fluid">
-            <p class="m-0">${skinPrices[i]}</p>
+            <img src="img/skin${i + 1}.png" class="img-fluid ${equipped == i ? "hasznalt" : megvan(i) ? "megveve" : ""}" onclick="megvesz(${i})">
+            <p class="m-0">${equipped == i ? "Használatban" : megvan(i) ? "Megvéve" : skinArak[i]}</p>
         </div>`
     }
 }
+
+function megvesz(i) {
+    if (megvan(i)) {
+        equipped = i;
+        localStorage.setItem("equipped", i);
+        kiir();
+        return;
+    }
+
+    if (balance < skinArak[i]) {
+        alert("Nincs elég pénzed!");
+        return;
+    }
+
+    balance -= skinArak[i];
+    localStorage.setItem("skin" + i, "1");
+    localStorage.setItem("balance", balance);
+    balanceMezo.innerHTML = balance;
+    kiir();
+}
+
+function megvan(i) {
+    return localStorage.getItem("skin" + i) == "1";
+}
+

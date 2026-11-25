@@ -254,3 +254,48 @@ footer{
     font-size: 200px;
     text-shadow: none;
 }
+
+.megvan {
+    opacity: 50%;
+}
+
+.skins img.hasznalt{
+    border: 3px solid #ffc93c;
+}
+
+.skin1{
+    background-image: url(../img/skin1.png)
+}
+.skin2{
+    background-image: url(../img/skin2.png)
+}
+.skin3{
+    background-image: url(../img/skin3.png)
+}
+.skin4{
+    background-image: url(../img/skin4.png)
+}
+.skin5{
+    background-image: url(../img/skin5.png)
+}
+.skin6{
+    background-image: url(../img/skin6.png)
+}
+.skin7{
+    background-image: url(../img/skin7.png)
+}
+.skin8{
+    background-image: url(../img/skin8.png)
+}
+.skin9{
+    background-image: url(../img/skin9.png)
+}
+.skin10{
+    background-image: url(../img/skin10.png)
+}
+.skin11{
+    background-image: url(../img/skin11.png)
+}
+.skin12{
+    background-image: url(../img/skin12.png)
+}
