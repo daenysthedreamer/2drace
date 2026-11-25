@@ -1,0 +1,1 @@
+//Auto.js egységteszt(Kincses)
