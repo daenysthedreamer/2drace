@@ -1,125 +1,126 @@
-<!DOCTYPE html>
-<html lang="hu" data-bs-theme="dark">
+    <!DOCTYPE html>
+    <html lang="hu" data-bs-theme="dark">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2D Verseny</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>2D Verseny</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-<body>
-    <header>
-        <h1 class="text-center py-3 mb-1">2D RACE</h1>
-    </header>
-    <main>
-        <section class="gameArea">
-            <p class="text-end pt-4 pe-4 m-0">SCORE: <span class="score">0</span></p>
-            <p class="text-end pe-4">LAPS: <span class="currentLaps">0</span>/<span class="max-laps">3</span></p>
-            <p class="text-center m-auto lapMessage d-none">LAP!!</p>
-            <div class="mx-auto buttonList">
-                <button class="btn btn-success play fs-3">PLAY</button>
-                <button class="btn btn-warning settings fs-3">Beállítások</button>
-                <button class="btn buy fs-3">SHOP</button>
-            </div>
-            <div class="finishLine"></div>
-        </section>
-    </main>
-    <footer>
-        <p class="text-center pt-5">Minden jog fenntartva!</p>
-    </footer>
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h1 class="modal-title text-white fs-5 fw-bold" id="exampleModalLabel">Beállítások</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <body>
+        <header>
+            <h1 class="text-center py-3 mb-1">2D RACE</h1>
+        </header>
+        <main>
+            <section class="gameArea">
+                <p class="text-end pt-4 pe-4 m-0">SCORE: <span class="score">0</span></p>
+                <p class="text-end pe-4">LAPS: <span class="currentLaps">0</span>/<span class="max-laps">3</span></p>
+                <p class="text-center m-auto lapMessage d-none">LAP!!</p>
+                <button class="btn btn-danger d-none reset fs-3" onclick="stop()">RESET</button>
+                <div class="mx-auto buttonList">
+                    <button class="btn btn-success play fs-3">PLAY</button>
+                    <button class="btn btn-warning settings fs-3">Beállítások</button>
+                    <button class="btn buy fs-3">SHOP</button>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="modes d-flex gap-3 mb-3">
-                            <button type="button" class="btn btn-primary fw-bold ms-auto easy">Easy</button>
-                            <button type="button" class="btn btn-success fw-bold ms-auto normal">Normal</button>
-                            <button type="button" class="btn btn-danger fw-bold ms-auto hard">Hard</button>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fs-6">Laps (3-15):</label>
-                            <input type="number" class="form-control laps" min="3" max="15">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fs-6">Max speed (14-24):</label>
-                            <input type="number" class="form-control maxSpeed" min="14" max="24">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fs-6">Lap length (4000-12000):</label>
-                            <input type="number" class="form-control lapLength" min="4000" max="12000">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
-                    <button type="button" class="btn btn-primary save">Mentés</button>
-                </div>
-            </div>
-        </div>
-    </div>
+                <div class="finishLine"></div>
+            </section>
+        </main>
+        <footer>
+            <p class="text-center pt-5">Minden jog fenntartva!</p>
+        </footer>
 
-    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <p class="fs-5 mb-3">Sikeres beállítás!</p>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="endModal" tabindex="-1" data-bs-backdrop="static">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Nyertél!</h5>
-      </div>
-      <div class="modal-body">
-        <p>Pontszám: <b class="endScore">0</b></p>
-        <p>Teljesített körök: <b class="endLaps">0</b></p>
-        <p>Egyenleg: <b class="endBalance">0</b></p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Új játék</button>
-      </div>
-    </div>
-</div>
-</div>
-
-    <div class="modal fade" id="shopModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-success">
-                    <h1 class="modal-title text-white fs-5 fw-bold">SHOP</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Egyenleg: <b class="balance">0</b></p>
-                    <div class="skins row g-3">
-
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h1 class="modal-title text-white fs-5 fw-bold" id="exampleModalLabel">Beállítások</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="modes d-flex gap-3 mb-3">
+                                <button type="button" class="btn btn-primary fw-bold ms-auto easy">Easy</button>
+                                <button type="button" class="btn btn-success fw-bold ms-auto normal">Normal</button>
+                                <button type="button" class="btn btn-danger fw-bold ms-auto hard">Hard</button>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fs-6">Laps (3-15):</label>
+                                <input type="number" class="form-control laps" min="3" max="15">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fs-6">Max speed (14-24):</label>
+                                <input type="number" class="form-control maxSpeed" min="14" max="24">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fs-6">Lap length (4000-12000):</label>
+                                <input type="number" class="form-control lapLength" min="4000" max="12000">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                        <button type="button" class="btn btn-primary save">Mentés</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <p class="fs-5 mb-3">Sikeres beállítás!</p>
+                        <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="endModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Nyertél!</h5>
+        </div>
+        <div class="modal-body">
+            <p>Pontszám: <b class="endScore">0</b></p>
+            <p>Teljesített körök: <b class="endLaps">0</b></p>
+            <p>Egyenleg: <b class="endBalance">0</b></p>
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Új játék</button>
+        </div>
+        </div>
+    </div>
     </div>
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/Entitasok.js"></script>
-    <script src="js/Auto.js"></script>
-    <script src="js/script.js"></script>
+        <div class="modal fade" id="shopModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h1 class="modal-title text-white fs-5 fw-bold">SHOP</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Egyenleg: <b class="balance">0</b></p>
+                        <div class="skins row g-3">
 
-</body>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-</html>
+        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="js/Entitasok.js"></script>
+        <script src="js/Auto.js"></script>
+        <script src="js/script.js"></script>
+
+    </body>
+
+    </html>

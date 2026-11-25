@@ -6,6 +6,7 @@ const playbtn = document.querySelector(".play");
 const beallitasbtn = document.querySelector(".settings");
 const mentesbtn = document.querySelector(".save");
 const buybtn = document.querySelector(".buy");
+const resetbtn = document.querySelector(".reset");
 var gameInterval = null;
 var player = null;
 const keys = new Set();
@@ -33,6 +34,8 @@ function movePlayer() {
     requestAnimationFrame(movePlayer);
 }
 
+movePlayer();
+
 function collide(a, b) {
     const pad = 40;
     if ((a.right - pad < b.left + pad) || (a.left + pad > b.right - pad) || (a.bottom - pad < b.top + pad) || (a.top + pad > b.bottom - pad)) return false;
@@ -53,6 +56,7 @@ var playing = false;
 playbtn.addEventListener('click', () => {
     if (driveInterval == null && player == null && gameInterval == null) {
         playing = true;
+        resetbtn.classList.toggle('d-none', !playing);
         btns.classList.toggle('d-none', playing)
         beallitasbtn.disabled = true;
         driveInterval = setInterval(() => {
@@ -63,7 +67,7 @@ playbtn.addEventListener('click', () => {
             gameArea.style.backgroundPositionX = (currentLeft - speed) + 'px';
 
             distance += speed;
-            Entitasok.setRoadSpeed(speed);
+            Entitasok.setRoadSpeed(speed+5);
             finishLine.style.left = ((currentLaps + 1) * lapLength - distance) + 'px';
             if (finishLine.getBoundingClientRect().left <= player.getRect().right) {
                 var x = 0;
@@ -116,10 +120,9 @@ playbtn.addEventListener('click', () => {
             var obj = new Entitasok(gameArea.offsetWidth, y, enemySpeed, ".gameArea");
             obj.move();
             enemies.push(obj);
-        }, 290);
+        }, 225);
 
         player = new Auto(20, gameArea.offsetHeight / 2.5, 6, ".gameArea");
-        movePlayer();
         document.querySelector(".player").classList.add((equipped!=null) ? `skin${parseInt(equipped)+1}` : "")
     }
 });
@@ -201,6 +204,7 @@ function stop() {
     finishLine.style.left = lapLength + 'px';
 
     playing = false;
+    resetbtn.classList.toggle('d-none', !playing);
     btns.classList.toggle('d-none', playing)
     beallitasbtn.disabled = false;
     beallitasbtn.classList.remove('disabled');
