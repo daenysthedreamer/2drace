@@ -6,7 +6,6 @@ class Entitasok{
     #element;
     #type
     #moveInterval
-    static #pont;
     static #roadSpeed = 0;
 
     constructor(x, y, speed, container){
@@ -45,7 +44,6 @@ class Entitasok{
         this.#type = Math.random() < 0.5;
         this.#element.classList.add("entitas");
         this.#container.appendChild(this.#element);
-        this.#element.addEventListener("click", () => this.collect());
     }
 
 
@@ -79,5 +77,5 @@ class Entitasok{
 isRemoved() {
     return !this.#element.isConnected;
 }
-//
+
 }

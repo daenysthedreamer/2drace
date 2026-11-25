@@ -35,6 +35,11 @@
                 </div>
                 <div class="modal-body">
                     <form>
+                        <div class="modes d-flex">
+                        <button class="btn btn-primary fw-bold ms-auto normal">Normal</button>
+                        <button class="btn btn-success fw-bold ms-auto easy">Easy</button>
+                        <button class="btn btn-danger fw-bold ms-auto hard">Hard</button>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label fs-6">Laps (1-10):</label>
                             <input type="number" class="form-control laps" min="1" max="10">
@@ -67,6 +72,23 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="endModal" tabindex="-1" data-bs-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nyertél!</h5>
+      </div>
+      <div class="modal-body">
+        <p>Pontszám: <b class="endScore">0</b></p>
+        <p>Teljesített körök: <b class="endLaps">0</b></p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Új játék</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/Entitasok.js"></script>

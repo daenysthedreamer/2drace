@@ -89,10 +89,11 @@ playbtn.addEventListener('click', () => {
             }
 
             if (currentLaps >= maxLaps) {
-                clearInterval(driveInterval);
-                clearInterval(gameInterval);
-                alert("Nyertél!");
-            }
+                document.querySelector(".endScore").textContent = Math.floor(score);
+                document.querySelector(".endLaps").textContent = currentLaps;
+                stop();
+                vegeModal.show();
+}
         }, 16);
 
         gameInterval = setInterval(() => {
@@ -161,3 +162,35 @@ function inputEllenorzes(value, min, max) {
     }
     return false;
 }
+
+
+
+function stop() {
+    clearInterval(driveInterval);
+    driveInterval = null;
+    clearInterval(gameInterval);
+    gameInterval = null;
+
+    gameArea.querySelectorAll(".player, .entitas").forEach(obj => obj.remove());
+    player = null;
+    enemies = [];
+
+    currentLaps = 0;
+    distance = 0;
+    currentLeft = 0;
+    score = 0;
+    speed = minSpeed;
+    lapsMezo.innerHTML = 0;
+    scoreMezo.innerHTML = 0;
+    gameArea.style.backgroundPositionX = '0px';
+    finishLine.style.left = lapLength + 'px';
+
+    playing = false;
+    playbtn.classList.toggle('d-none', playing);
+    beallitasbtn.disabled = false;
+    beallitasbtn.classList.remove('disabled');
+
+}
+
+var vegeModal = new bootstrap.Modal('#endModal');
+document.querySelector('#endModal').addEventListener('hidden.bs.modal', stop);
