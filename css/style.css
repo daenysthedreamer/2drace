@@ -16,12 +16,6 @@ header{
     position:relative;
 }
 
-header .btn{
-    position:absolute;
-    left:5%;
-    top:15%
-}
-
 header h1{
     color: #fff;
     font-weight: 700;
@@ -50,11 +44,25 @@ header h1{
     text-shadow: 2px 2px 0 #000;
 }
 
-.gameArea .btn{
+.gameArea .play{
+    position:absolute;
+    top:50%;
+    left:50%;
+    translate: -50% -200%;
+}
+
+.gameArea .settings{
     position:absolute;
     top:50%;
     left:50%;
     translate: -50% -50%;
+}
+
+.gameArea .buy{
+    position:absolute;
+    top:50%;
+    left:50%;
+    translate: -50% 100%;
 }
 
 .score, .currentLaps{
@@ -144,6 +152,43 @@ header h1{
     box-shadow: 0 2px 0 #0a0e1c !important;
 }
 
+.btn-danger{
+    background-color: #e8394d !important;
+    border-color: #ff8a96 !important;
+    color: #fff !important;
+    box-shadow: 0 6px 0 #7a1620 !important;
+}
+
+.btn.btn-danger:hover{
+    background-color: #ff5468 !important;
+}
+
+.btn.btn-danger:active{
+    background-color: #c42d3f !important;
+    box-shadow: 0 2px 0 #7a1620 !important;
+}
+
+.btn.buy{
+    background-color: #2fbf5b !important;
+    border-color: #8df0a8 !important;
+    color: #0a0e1c !important;
+    box-shadow: 0 6px 0 #145c2a !important;
+}
+
+.btn.buy:hover{
+    background-color: #4ad676 !important;
+}
+
+.btn.buy:active{
+    background-color: #25994a !important;
+    box-shadow: 0 2px 0 #145c2a !important;
+}
+
+.modes .btn{
+    min-width: 0;
+    width: 100%;
+}
+
 .modal-content{
     background-color: #111830;
     color: #c9cbd6;
@@ -204,4 +249,8 @@ footer{
 
 .auto6{
     background-image: url(../img/auto6.png);
+}
+.gameArea p.lapMessage {
+    font-size: 200px;
+    text-shadow: none;
 }

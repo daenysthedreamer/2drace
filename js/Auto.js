@@ -45,7 +45,7 @@ class Auto {
         if (this.#x < 0) this.#x = 0;
         if (this.#y < 0) this.#y = 0;
         if (this.#x > this.#container.clientWidth - 120) this.#x = this.#container.clientWidth - 120;
-        if (this.#y > this.#container.clientHeight - 150) this.#y = this.#container.clientHeight - 150;
+        if (this.#y > this.#container.clientHeight - 100) this.#y = this.#container.clientHeight - 100;
 
         this.#element.style.left = this.#x + "px";
         this.#element.style.top = this.#y + "px";

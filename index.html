@@ -12,13 +12,17 @@
 <body>
     <header>
         <h1 class="text-center py-3 mb-1">2D RACE</h1>
-        <button class="btn btn-warning mx-auto settings fs-3">Beállítások</button>
     </header>
     <main>
         <section class="gameArea">
             <p class="text-end pt-4 pe-4 m-0">SCORE: <span class="score">0</span></p>
             <p class="text-end pe-4">LAPS: <span class="currentLaps">0</span>/<span class="max-laps">3</span></p>
-            <button class="btn btn-success mx-auto play fs-3">PLAY</button>
+            <p class="text-center m-auto lapMessage d-none">LAP!!</p>
+            <div class="mx-auto buttonList">
+                <button class="btn btn-success play fs-3">PLAY</button>
+                <button class="btn btn-warning settings fs-3">Beállítások</button>
+                <button class="btn buy fs-3">SHOP</button>
+            </div>
             <div class="finishLine"></div>
         </section>
     </main>
@@ -35,10 +39,10 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="modes d-flex">
-                        <button type="button" class="btn btn-primary fw-bold ms-auto easy" >Easy</button>
-                        <button type="button" class="btn btn-success fw-bold ms-auto normal" >Normal</button>
-                        <button type="button" class="btn btn-danger fw-bold ms-auto hard" >Hard</button>
+                        <div class="modes d-flex gap-3 mb-3">
+                            <button type="button" class="btn btn-primary fw-bold ms-auto easy">Easy</button>
+                            <button type="button" class="btn btn-success fw-bold ms-auto normal">Normal</button>
+                            <button type="button" class="btn btn-danger fw-bold ms-auto hard">Hard</button>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fs-6">Laps (3-15):</label>
@@ -87,8 +91,26 @@
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Új játék</button>
       </div>
     </div>
-  </div>
-</div>
+
+    <div class="modal fade" id="shopModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h1 class="modal-title text-white fs-5 fw-bold">SHOP</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Egyenleg: <b class="balance">0</b></p>
+                    <div class="skins row g-3">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/Entitasok.js"></script>

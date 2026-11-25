@@ -1,15 +1,18 @@
 var gameArea = document.querySelector(".gameArea");
 var finishLine = document.querySelector(".finishLine");
 var driveInterval = null;
+const btns = document.querySelector(".buttonList");
 const playbtn = document.querySelector(".play");
 const beallitasbtn = document.querySelector(".settings");
 const mentesbtn = document.querySelector(".save");
+const buybtn = document.querySelector(".buy");
 var gameInterval = null;
 var player = null;
 const keys = new Set();
 
 var beallitasModal = new bootstrap.Modal('#exampleModal');
 var sikerModal = new bootstrap.Modal('#successModal');
+var shopModal = new bootstrap.Modal('#shopModal');
 
 var maxLaps = 3;
 var minSpeed = 6;
@@ -50,7 +53,8 @@ var playing = false;
 playbtn.addEventListener('click', () => {
     if (driveInterval == null && player == null && gameInterval == null) {
         playing = true;
-        playbtn.classList.toggle('d-none', playing)
+        btns.classList.toggle('d-none', playing)
+        beallitasbtn.disabled = true;
         driveInterval = setInterval(() => {
             if (speed < maxSpeed) {
                 speed += acceleration;
@@ -62,6 +66,12 @@ playbtn.addEventListener('click', () => {
             Entitasok.setRoadSpeed(speed);
             finishLine.style.left = ((currentLaps + 1) * lapLength - distance) + 'px';
             if (finishLine.getBoundingClientRect().left <= player.getRect().right) {
+                var x = 0;
+                var lapAnim = setInterval(() => {
+                    document.querySelector(".lapMessage").classList.toggle('d-none', x % 2 == 1);
+                    x++;
+                    if (x == 10) clearInterval(lapAnim);
+                }, 60);
                 currentLaps++;
                 lapsMezo.innerHTML = currentLaps;
             }
@@ -89,11 +99,15 @@ playbtn.addEventListener('click', () => {
             }
 
             if (currentLaps >= maxLaps) {
-                document.querySelector(".endScore").textContent = Math.floor(score);
-                document.querySelector(".endLaps").textContent = currentLaps;
+                document.querySelector(".endScore").innerHTML = Math.floor(score);
+                document.querySelector(".endLaps").innerHTML = currentLaps;
+                var oldBalance = balance;
+                balance += Math.floor(score);
+                localStorage.setItem("balance", balance);
+                document.querySelector(".endBalance").innerHTML = oldBalance + " → " + balance;
                 stop();
                 vegeModal.show();
-}
+            }
         }, 16);
 
         gameInterval = setInterval(() => {
@@ -126,7 +140,7 @@ beallitasbtn.addEventListener('click', () => {
 mentesbtn.addEventListener('click', () => {
     var valid = true;
     document.querySelectorAll("input").forEach(input => input.classList.remove('is-invalid'))
-    
+
     if (inputEllenorzes(lapsInput.value, 3, 15) == false) {
         lapsInput.classList.add("is-invalid");
         valid = false;
@@ -146,7 +160,7 @@ mentesbtn.addEventListener('click', () => {
     maxSpeed = Number(speedInput.value);
     lapLength = Number(lapLengthInput.value);
     speed = Math.min(speed, maxSpeed);
-    document.querySelector(".max-laps").textContent = maxLaps;
+    document.querySelector(".max-laps").innerHTML = maxLaps;
 
     beallitasModal.hide();
 
@@ -186,7 +200,7 @@ function stop() {
     finishLine.style.left = lapLength + 'px';
 
     playing = false;
-    playbtn.classList.toggle('d-none', playing);
+    btns.classList.toggle('d-none', playing)
     beallitasbtn.disabled = false;
     beallitasbtn.classList.remove('disabled');
 
@@ -198,20 +212,42 @@ document.querySelector('#endModal').addEventListener('hidden.bs.modal', stop);
 
 
 
-document.querySelector(".modes .easy").addEventListener("click", ()=>{
+document.querySelector(".modes .easy").addEventListener("click", () => {
     document.querySelector(".laps").value = "3";
     document.querySelector(".maxSpeed").value = "14";
     document.querySelector(".lapLength").value = "5000";
 })
 
-document.querySelector(".modes .normal").addEventListener("click", ()=>{
+document.querySelector(".modes .normal").addEventListener("click", () => {
     document.querySelector(".laps").value = "5";
     document.querySelector(".maxSpeed").value = "18";
     document.querySelector(".lapLength").value = "8000";
 })
 
-document.querySelector(".modes .hard").addEventListener("click", ()=>{
+document.querySelector(".modes .hard").addEventListener("click", () => {
     document.querySelector(".laps").value = "12";
     document.querySelector(".maxSpeed").value = "22";
     document.querySelector(".lapLength").value = "12000";
 })
+
+var skinPrices = [200, 300, 400, 500, 600, 800, 1000, 1200, 1500, 2000, 2500, 3000];
+var skinList = document.querySelector(".skins");
+var balance = Number(localStorage.getItem("balance")) || 0;
+var balanceMezo = document.querySelector(".balance");
+
+buybtn.addEventListener('click', () => {
+    balanceMezo.innerHTML = balance;
+    shopModal.show();
+    kiir();
+});
+
+function kiir() {
+    skinList.innerHTML = "";
+    for (let i = 0; i < skinPrices.length; i++) {
+        skinList.innerHTML += `
+        <div class="col-3 text-center">
+            <img src="img/skin${i + 1}.png" class="img-fluid">
+            <p class="m-0">${skinPrices[i]}</p>
+        </div>`
+    }
+}
