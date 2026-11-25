@@ -127,15 +127,15 @@ mentesbtn.addEventListener('click', () => {
     var valid = true;
     document.querySelectorAll("input").forEach(input => input.classList.remove('is-invalid'))
     
-    if (inputEllenorzes(lapsInput.value, 1, 10) == false) {
+    if (inputEllenorzes(lapsInput.value, 3, 15) == false) {
         lapsInput.classList.add("is-invalid");
         valid = false;
     }
-    else if (inputEllenorzes(speedInput.value, 8, 20) == false) {
+    else if (inputEllenorzes(speedInput.value, 14, 24) == false) {
         speedInput.classList.add("is-invalid");
         valid = false;
     }
-    else if (inputEllenorzes(lapLengthInput.value, 2000, 10000) == false) {
+    else if (inputEllenorzes(lapLengthInput.value, 4000, 12000) == false) {
         lapLengthInput.classList.add("is-invalid")
         valid = false;
     }
@@ -194,3 +194,24 @@ function stop() {
 
 var vegeModal = new bootstrap.Modal('#endModal');
 document.querySelector('#endModal').addEventListener('hidden.bs.modal', stop);
+
+
+
+
+document.querySelector(".modes .easy").addEventListener("click", ()=>{
+    document.querySelector(".laps").value = "3";
+    document.querySelector(".maxSpeed").value = "14";
+    document.querySelector(".lapLength").value = "5000";
+})
+
+document.querySelector(".modes .normal").addEventListener("click", ()=>{
+    document.querySelector(".laps").value = "5";
+    document.querySelector(".maxSpeed").value = "18";
+    document.querySelector(".lapLength").value = "8000";
+})
+
+document.querySelector(".modes .hard").addEventListener("click", ()=>{
+    document.querySelector(".laps").value = "12";
+    document.querySelector(".maxSpeed").value = "22";
+    document.querySelector(".lapLength").value = "12000";
+})

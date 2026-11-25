@@ -62,11 +62,11 @@ header h1{
     font-weight: 700;
 }
 
-.entitas, .player{
+.entitas, .player, .auto2, .auto3, .auto4, .auto5, .auto6{
     position: absolute;
     width: 120px;
     height: 120px;
-    background-image: url(../img/auto.png);
+    background-image: url(../img/auto1.png);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -184,4 +184,24 @@ header h1{
 
 footer{
     border-top: 6px dashed #8b90a8;
+}
+
+.auto2{
+    background-image: url(../img/auto2.png);
+}
+
+.auto3{
+    background-image: url(../img/auto3.png);
+}
+
+.auto4{
+    background-image: url(../img/auto4.png);
+}
+
+.auto5{
+    background-image: url(../img/auto5.png);
+}
+
+.auto6{
+    background-image: url(../img/auto6.png);
 }

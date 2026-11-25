@@ -41,8 +41,11 @@ class Entitasok{
         this.#element = document.createElement("div");
         this.#element.style.left = this.#x + "px";
         this.#element.style.top = this.#y + "px";
-        this.#type = Math.random() < 0.5;
         this.#element.classList.add("entitas");
+        this.#type = Math.floor(1 + Math.random()*5);
+        this.#element.classList.add(`auto${this.#type}`)
+
+
         this.#container.appendChild(this.#element);
     }
 
@@ -77,5 +80,6 @@ class Entitasok{
 isRemoved() {
     return !this.#element.isConnected;
 }
+
 
 }
