@@ -14,6 +14,7 @@ const keys = new Set();
 var beallitasModal = new bootstrap.Modal('#exampleModal');
 var sikerModal = new bootstrap.Modal('#successModal');
 var shopModal = new bootstrap.Modal('#shopModal');
+var balanceModal = new bootstrap.Modal("#balanceModal");
 
 var maxLaps = 3;
 var minSpeed = 6;
@@ -90,6 +91,9 @@ playbtn.addEventListener('click', () => {
 
                     var x = 0;
                     var anim = setInterval(() => {
+                        if(driveInterval == null){
+                            clearInterval(anim);
+                        }
                         document.querySelector(".player").classList.toggle('d-none', x % 2 == 0);
                         x++;
                         if (x == 10) clearInterval(anim);
@@ -115,7 +119,7 @@ playbtn.addEventListener('click', () => {
         }, 16);
 
         gameInterval = setInterval(() => {
-            var y = Math.random() * (gameArea.offsetHeight - 150);
+            var y = Math.random() * (gameArea.offsetHeight - 100);
             var enemySpeed = Math.random() * 4;
             var obj = new Entitasok(gameArea.offsetWidth, y, enemySpeed, ".gameArea");
             obj.move();
@@ -123,7 +127,9 @@ playbtn.addEventListener('click', () => {
         }, 225);
 
         player = new Auto(20, gameArea.offsetHeight / 2.5, 6, ".gameArea");
-        document.querySelector(".player").classList.add((equipped!=null) ? `skin${parseInt(equipped)+1}` : "")
+        if (equipped != null) {
+            document.querySelector(".player").classList.add(`skin${parseInt(equipped) + 1}`);
+        }
     }
 });
 
@@ -253,7 +259,7 @@ function kiir() {
         skinList.innerHTML += `
         <div class="col-3 text-center">
             <img src="img/skin${i + 1}.png" class="img-fluid ${equipped == i ? "hasznalt" : megvan(i) ? "megveve" : ""}" onclick="megvesz(${i})">
-            <p class="m-0">${equipped == i ? "Használatban" : megvan(i) ? "Megvéve" : skinArak[i]}</p>
+            <p class="m-0">${equipped == i ? "Használt" : megvan(i) ? "Megvéve" : skinArak[i]}</p>
         </div>`
     }
 }
@@ -267,7 +273,7 @@ function megvesz(i) {
     }
 
     if (balance < skinArak[i]) {
-        alert("Nincs elég pénzed!");
+        balanceModal.show();
         return;
     }
 

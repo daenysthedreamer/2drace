@@ -55,4 +55,7 @@ class Auto {
         return this.#element.getBoundingClientRect();
     }
     //
+    toString(){
+    return `{${this.#x};${this.#y};${this.#speed}}`
+}
 }
