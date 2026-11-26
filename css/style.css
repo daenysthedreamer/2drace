@@ -24,9 +24,6 @@ header{
 
 header h1{
     color: #fff;
-    font-weight: 700;
-    font-size: 2.8rem;
-    letter-spacing: 6px;
     text-shadow: 4px 4px 0 #1e6fe0;
 }
 
@@ -276,7 +273,7 @@ footer{
 }
 
 .skins img.hasznalt{
-    border: 3px solid #ffc93c;
+    outline: 3px solid #ffc93c;
 }
 
 .skin1{

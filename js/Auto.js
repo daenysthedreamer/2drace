@@ -50,11 +50,9 @@ class Auto {
         this.#element.style.left = this.#x + "px";
         this.#element.style.top = this.#y + "px";
     }
-//ai
     getRect() {
         return this.#element.getBoundingClientRect();
     }
-    //
     toString(){
     return `{${this.#x};${this.#y};${this.#speed}}`
 }

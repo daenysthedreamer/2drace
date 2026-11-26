@@ -72,7 +72,6 @@ class Entitasok {
         clearInterval(this.#moveInterval);
         this.#moveInterval = null;
     }
-    //ai
     getRect() {
         return this.#element.getBoundingClientRect();
     }
